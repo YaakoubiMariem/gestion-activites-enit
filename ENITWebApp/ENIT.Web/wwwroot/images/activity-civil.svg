@@ -1,0 +1,16 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" rx="36" fill="url(#g4)"/>
+  <path d="M108 244L218 120L324 244H108Z" fill="#DCEBFF"/>
+  <path d="M246 244L356 96L474 244H246Z" fill="white"/>
+  <rect x="432" y="104" width="94" height="140" rx="18" fill="#F1B71C"/>
+  <path d="M458 142H500" stroke="white" stroke-width="12" stroke-linecap="round"/>
+  <path d="M458 174H500" stroke="white" stroke-width="12" stroke-linecap="round"/>
+  <path d="M458 206H500" stroke="white" stroke-width="12" stroke-linecap="round"/>
+  <text x="60" y="66" fill="white" font-size="34" font-family="Segoe UI, Arial">BIM & Construction Durable</text>
+  <defs>
+    <linearGradient id="g4" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#214A94"/>
+      <stop offset="1" stop-color="#20B486"/>
+    </linearGradient>
+  </defs>
+</svg>

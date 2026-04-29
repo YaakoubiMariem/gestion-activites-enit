@@ -1,0 +1,124 @@
+@model ENIT.Web.ViewModels.Activities.ActivityDetailsViewModel
+@{
+    ViewData["Title"] = "Détails activité";
+}
+
+<div class="detail-hero">
+    <img src="@Model.Activity.CoverImagePath" alt="@Model.Activity.Title" class="detail-cover" />
+    <div class="detail-copy">
+        <span class="badge-soft">@Model.Activity.DepartmentName</span>
+        <h1>@Model.Activity.Title</h1>
+        <p>@Model.Activity.Description</p>
+        <div class="activity-info-grid">
+            <span><i class="ti ti-calendar-event"></i> @Model.Activity.StartDate.ToString("dd/MM/yyyy HH:mm") - @Model.Activity.EndDate.ToString("HH:mm")</span>
+            <span><i class="ti ti-map-pin"></i> @(Model.Activity.IsOnline ? "En ligne" : Model.Activity.Location)</span>
+            <span><i class="ti ti-category"></i> @Model.Activity.Type</span>
+            <span><i class="ti ti-users"></i> @Model.Activity.RegisteredCount / @Model.Activity.Capacity</span>
+        </div>
+        <div class="detail-actions">
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                @if (Model.Activity.IsUserRegistered)
+                {
+                    <form asp-action="Unregister" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@Model.Activity.Id" />
+                        <button class="btn btn-enit-outline" type="submit">Se désinscrire</button>
+                    </form>
+                }
+                else
+                {
+                    <form asp-action="Register" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@Model.Activity.Id" />
+                        <button class="btn btn-enit-primary" type="submit">S'inscrire</button>
+                    </form>
+                }
+            }
+            @if (User.IsInRole("DepartmentAdmin") || User.IsInRole("SuperAdmin"))
+            {
+                <a asp-action="Edit" asp-route-id="@Model.Activity.Id" class="btn btn-enit-light">Modifier</a>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="dashboard-grid secondary">
+    <section class="content-card">
+        <div class="section-head">
+            <div>
+                <span class="eyebrow">Participants</span>
+                <h2>Liste des inscrits</h2>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-modern">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Matricule</th>
+                        <th>Statut</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var participant in Model.Participants)
+                {
+                    <tr>
+                        <td>@participant.FullName</td>
+                        <td>@participant.Matricule</td>
+                        <td>@participant.Status</td>
+                        <td>@participant.RegistrationDate.ToString("dd/MM/yyyy HH:mm")</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="content-card">
+        <div class="section-head">
+            <div>
+                <span class="eyebrow">Feedbacks</span>
+                <h2>Commentaires étudiants</h2>
+            </div>
+        </div>
+        <div class="comment-list">
+            @foreach (var comment in Model.Comments)
+            {
+                <div class="comment-item">
+                    <div class="comment-head">
+                        <strong>@comment.UserName</strong>
+                        <span>@comment.DepartmentName · @comment.CreatedAt.ToString("dd/MM/yyyy")</span>
+                    </div>
+                    <p>@comment.Content</p>
+                    @if (comment.Rating.HasValue)
+                    {
+                        <small>Note : @comment.Rating / 5</small>
+                    }
+                </div>
+            }
+        </div>
+
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <form asp-action="AddComment" method="post" class="comment-form">
+                @Html.AntiForgeryToken()
+                <input asp-for="NewComment.ActivityId" type="hidden" />
+                <div class="form-floating mb-3">
+                    <textarea asp-for="NewComment.Content" class="form-control" placeholder="Votre retour" style="height: 120px"></textarea>
+                    <label asp-for="NewComment.Content">Votre commentaire</label>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="NewComment.Rating" class="form-label">Note</label>
+                    <input asp-for="NewComment.Rating" class="form-control" type="number" min="1" max="5" />
+                </div>
+                <button type="submit" class="btn btn-enit-primary">Publier</button>
+            </form>
+        }
+    </section>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

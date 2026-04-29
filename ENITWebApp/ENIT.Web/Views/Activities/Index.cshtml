@@ -1,0 +1,69 @@
+@model ENIT.Web.ViewModels.Activities.ActivityIndexViewModel
+@{
+    ViewData["Title"] = "Activités";
+}
+
+<div class="page-header">
+    <div>
+        <span class="eyebrow">Catalogue académique</span>
+        <h1>Explorer les activités ENIT</h1>
+    </div>
+    @if (User.IsInRole("DepartmentAdmin") || User.IsInRole("SuperAdmin"))
+    {
+        <a asp-action="Create" class="btn btn-enit-primary"><i class="ti ti-circle-plus"></i> Nouvelle activité</a>
+    }
+</div>
+
+<section class="content-card filter-card">
+    <form method="get" class="row g-3">
+        <div class="col-md-4">
+            <input name="search" value="@Model.Search" class="form-control" placeholder="Rechercher une activité..." />
+        </div>
+        <div class="col-md-3">
+            <select name="departmentId" asp-items="Model.Departments" class="form-select">
+                <option value="">Tous les départements</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select name="type" asp-items="Model.Types" class="form-select">
+                <option value="">Tous les types</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <input type="date" name="date" value="@(Model.Date?.ToString("yyyy-MM-dd"))" class="form-control" />
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-enit-primary w-100" type="submit">Filtrer</button>
+        </div>
+    </form>
+</section>
+
+<div class="activity-grid">
+    @foreach (var item in Model.Activities)
+    {
+        <article class="activity-card">
+            <img src="@item.CoverImagePath" alt="@item.Title" class="activity-cover" />
+            <div class="activity-content">
+                <div class="activity-meta-row">
+                    <span class="badge-soft">@item.DepartmentName</span>
+                    <span class="status-badge">@item.Status</span>
+                </div>
+                <h3>@item.Title</h3>
+                <p>@(item.Description.Length > 120 ? item.Description[..120] + "..." : item.Description)</p>
+                <div class="activity-info-grid">
+                    <span><i class="ti ti-calendar-event"></i> @item.StartDate.ToString("dd/MM/yyyy HH:mm")</span>
+                    <span><i class="ti ti-map-pin"></i> @(item.IsOnline ? "En ligne" : item.Location)</span>
+                    <span><i class="ti ti-users"></i> @item.RegisteredCount / @item.Capacity</span>
+                    <span><i class="ti ti-category"></i> @item.Type</span>
+                </div>
+                <div class="activity-actions">
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-enit-primary">Détails</a>
+                    @if (item.IsUserRegistered)
+                    {
+                        <span class="registered-pill">Déjà inscrit</span>
+                    }
+                </div>
+            </div>
+        </article>
+    }
+</div>

@@ -1,0 +1,17 @@
+@model ENIT.Web.ViewModels.Activities.ActivityFormViewModel
+@{
+    ViewData["Title"] = "Modifier activité";
+}
+
+<div class="page-header">
+    <div>
+        <span class="eyebrow">Administration</span>
+        <h1>Modifier l'activité</h1>
+    </div>
+</div>
+
+<partial name="_ActivityForm" model="Model" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

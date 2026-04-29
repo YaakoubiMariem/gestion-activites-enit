@@ -1,0 +1,43 @@
+@using ENIT.BL.Entities
+@model (ApplicationUser? User, string? RoleName, string Title)
+
+<header class="topbar">
+    <div class="topbar-left">
+        <button class="sidebar-toggle d-xl-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
+            <i class="ti ti-menu-2"></i>
+        </button>
+        <div class="topbar-heading">
+            <h2>@Model.Title</h2>
+            <p class="topbar-subtitle">Plateforme des activites departementales de l'Ecole Nationale d'Ingenieurs de Tunis</p>
+        </div>
+    </div>
+
+    <div class="topbar-actions">
+        <a asp-controller="Calendar" asp-action="Index" class="btn btn-enit-ghost d-none d-md-inline-flex">
+            <i class="ti ti-calendar-stats"></i>
+            <span>Calendrier</span>
+        </a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Changer de theme">
+            <i class="ti ti-moon-stars"></i>
+        </button>
+
+        @if (Model.User is null)
+        {
+            <a asp-controller="Account" asp-action="Login" class="btn btn-enit-outline">Connexion</a>
+            <a asp-controller="Account" asp-action="Register" class="btn btn-enit-primary">Inscription</a>
+        }
+        else
+        {
+            <div class="topbar-user">
+                <span class="topbar-logo">
+                    <img src="~/images/enit-logo.svg" alt="Logo ENIT" />
+                </span>
+                <img src="@(Model.User.ProfilePhotoPath ?? "/images/avatar-default.svg")" alt="Profil" class="topbar-avatar" />
+                <div>
+                    <strong>@Model.User.FullName</strong>
+                    <span>@Model.RoleName</span>
+                </div>
+            </div>
+        }
+    </div>
+</header>

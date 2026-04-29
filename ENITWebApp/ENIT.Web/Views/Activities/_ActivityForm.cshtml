@@ -1,0 +1,89 @@
+@model ENIT.Web.ViewModels.Activities.ActivityFormViewModel
+
+<form method="post" class="content-card form-card" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <input asp-for="Id" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+    <div class="row g-3">
+        <div class="col-md-8">
+            <div class="form-floating">
+                <input asp-for="Title" class="form-control" placeholder="Titre" />
+                <label asp-for="Title"></label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-floating">
+                <select asp-for="DepartmentId" asp-items="Model.Departments" class="form-select"></select>
+                <label asp-for="DepartmentId">Département</label>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-floating">
+                <textarea asp-for="Description" class="form-control" placeholder="Description" style="height: 160px"></textarea>
+                <label asp-for="Description"></label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-floating">
+                <select asp-for="Type" asp-items="Html.GetEnumSelectList<ENIT.BL.Enums.ActivityType>()" class="form-select"></select>
+                <label asp-for="Type"></label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-floating">
+                <select asp-for="Status" asp-items="Html.GetEnumSelectList<ENIT.BL.Enums.ActivityStatus>()" class="form-select"></select>
+                <label asp-for="Status"></label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-floating">
+                <input asp-for="StartDate" class="form-control" type="datetime-local" value="@Model.StartDate.ToString("yyyy-MM-ddTHH:mm")" />
+                <label asp-for="StartDate"></label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-floating">
+                <input asp-for="EndDate" class="form-control" type="datetime-local" value="@Model.EndDate.ToString("yyyy-MM-ddTHH:mm")" />
+                <label asp-for="EndDate"></label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-floating">
+                <input asp-for="Location" class="form-control" placeholder="Lieu" />
+                <label asp-for="Location"></label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-floating">
+                <input asp-for="Link" class="form-control" placeholder="Lien" />
+                <label asp-for="Link"></label>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-floating">
+                <input asp-for="Capacity" class="form-control" placeholder="Capacité" />
+                <label asp-for="Capacity"></label>
+            </div>
+        </div>
+        <div class="col-md-2 d-flex align-items-center">
+            <div class="form-check form-switch ms-2">
+                <input asp-for="IsOnline" class="form-check-input" />
+                <label asp-for="IsOnline" class="form-check-label">En ligne</label>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-floating">
+                <input asp-for="CoverImagePath" class="form-control" placeholder="Image de couverture" />
+                <label asp-for="CoverImagePath">Chemin image</label>
+            </div>
+        </div>
+        <div class="col-12">
+            <label asp-for="CoverImageFile" class="form-label">Upload image de couverture</label>
+            <input asp-for="CoverImageFile" class="form-control" type="file" accept="image/*" />
+        </div>
+    </div>
+    <div class="mt-4 d-flex gap-2">
+        <button type="submit" class="btn btn-enit-primary">Enregistrer</button>
+        <a asp-action="Index" class="btn btn-enit-light">Annuler</a>
+    </div>
+</form>

@@ -1,0 +1,110 @@
+@model ENIT.Web.ViewModels.Account.LoginViewModel
+@{
+    ViewData["Title"] = "Connexion";
+}
+
+<section class="auth-showcase">
+    <div class="auth-showcase-panel auth-showcase-form">
+        <div class="auth-showcase-top">
+            <a asp-controller="Home" asp-action="Index" class="auth-mini-brand">ENIT Activities Hub</a>
+            <a asp-action="Register" class="btn btn-auth-accent">Sign Up</a>
+        </div>
+
+        <div class="auth-showcase-copy">
+            <h1>Login now</h1>
+            <p>Hi, welcome back. Connectez-vous pour acceder aux activites, au calendrier et aux inscriptions de votre departement.</p>
+        </div>
+
+        <div class="auth-quick-access">
+            <button type="button" class="btn btn-auth-soft w-100">
+                <i class="ti ti-school"></i>
+                <span>Entrer avec un compte ENIT</span>
+            </button>
+            <div class="auth-divider"><span>or login with email</span></div>
+        </div>
+
+        <form method="post" class="auth-showcase-form-body">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label auth-label">Email</label>
+                <input asp-for="Email" class="form-control auth-input" placeholder="Enter your email id" />
+            </div>
+
+            <div class="mb-3">
+                <div class="auth-label-row">
+                    <label asp-for="Password" class="form-label auth-label mb-0">Password</label>
+                    <span class="auth-link-soft">Secure access</span>
+                </div>
+                <div class="auth-password-wrap">
+                    <input asp-for="Password" class="form-control auth-input" placeholder="Enter your password" />
+                    <span class="auth-password-icon"><i class="ti ti-eye"></i></span>
+                </div>
+            </div>
+
+            <div class="auth-options-row">
+                <div class="form-check">
+                    <input asp-for="RememberMe" class="form-check-input" />
+                    <label asp-for="RememberMe" class="form-check-label">Remember me</label>
+                </div>
+                <span class="auth-link-soft">Forgot password?</span>
+            </div>
+
+            <button type="submit" class="btn btn-auth-primary w-100 mt-3">Login</button>
+        </form>
+
+        <div class="auth-helper-box">
+            <strong>Demo access</strong>
+            <span>superadmin@enit.tn / P@ssword123!</span>
+            <span>admin.info@enit.tn / P@ssword123!</span>
+            <span>etudiant1@enit.tn / P@ssword123!</span>
+        </div>
+
+        <p class="auth-bottom-text">Not registered yet? <a asp-action="Register">Create an account</a></p>
+    </div>
+
+    <div class="auth-showcase-panel auth-showcase-visual">
+        <div class="auth-illustration">
+            <div class="auth-illustration-monitor">
+                <div class="monitor-topbar"></div>
+                <div class="monitor-screen">
+                    <div class="monitor-row">
+                        <span class="monitor-dot red"></span>
+                        <span class="monitor-dot blue"></span>
+                        <span class="monitor-line short"></span>
+                    </div>
+                    <div class="monitor-grid">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="floating-card one"></div>
+            <div class="floating-card two"></div>
+            <div class="floating-card three"></div>
+            <div class="idea-bulb">
+                <i class="ti ti-bulb"></i>
+            </div>
+            <div class="student-figure left"></div>
+            <div class="student-figure right"></div>
+        </div>
+
+        <div class="auth-visual-caption">
+            <img src="~/images/enit-logo.svg" alt="Logo ENIT" class="auth-side-logo" />
+            <div>
+                <span class="eyebrow">Academic platform</span>
+                <h2>Une experience plus claire pour les etudiants et les departements</h2>
+                <p>Consultez les activites, suivez les inscriptions et participez a la vie universitaire dans une interface plus moderne.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

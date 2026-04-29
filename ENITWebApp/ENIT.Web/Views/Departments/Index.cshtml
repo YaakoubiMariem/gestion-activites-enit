@@ -1,0 +1,37 @@
+@model ENIT.Web.ViewModels.Departments.DepartmentIndexViewModel
+@{
+    ViewData["Title"] = "Départements";
+}
+
+<div class="page-header">
+    <div>
+        <span class="eyebrow">Structure académique</span>
+        <h1>Départements ENIT</h1>
+    </div>
+    @if (User.IsInRole("SuperAdmin"))
+    {
+        <a asp-action="Create" class="btn btn-enit-primary"><i class="ti ti-plus"></i> Nouveau département</a>
+    }
+</div>
+
+<div class="dept-grid">
+    @foreach (var dept in Model.Departments)
+    {
+        <article class="dept-card">
+            <img src="@dept.LogoPath" alt="@dept.Name" class="dept-logo" />
+            <div class="dept-card-body">
+                <span class="badge-soft">@dept.Code</span>
+                <h3>@dept.Name</h3>
+                <p>@dept.Description</p>
+                <div class="dept-stats">
+                    <span>@dept.UsersCount utilisateurs</span>
+                    <span>@dept.ActivitiesCount activités</span>
+                </div>
+                @if (User.IsInRole("SuperAdmin"))
+                {
+                    <a asp-action="Edit" asp-route-id="@dept.Id" class="btn btn-enit-light">Modifier</a>
+                }
+            </div>
+        </article>
+    }
+</div>

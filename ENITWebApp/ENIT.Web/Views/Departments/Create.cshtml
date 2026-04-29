@@ -1,0 +1,17 @@
+@model ENIT.Web.ViewModels.Departments.DepartmentFormViewModel
+@{
+    ViewData["Title"] = "Nouveau département";
+}
+
+<div class="page-header">
+    <div>
+        <span class="eyebrow">Super administration</span>
+        <h1>Créer un département</h1>
+    </div>
+</div>
+
+<partial name="_DepartmentForm" model="Model" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

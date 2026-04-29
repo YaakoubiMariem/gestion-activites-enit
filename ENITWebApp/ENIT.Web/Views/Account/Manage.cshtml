@@ -1,0 +1,117 @@
+@model ENIT.Web.ViewModels.Account.ManageAccountViewModel
+@{
+    ViewData["Title"] = "Mon compte";
+    var passwordModel = ViewBag.PasswordModel as ENIT.Web.ViewModels.Account.ChangePasswordViewModel
+        ?? new ENIT.Web.ViewModels.Account.ChangePasswordViewModel();
+}
+
+<div class="page-header">
+    <div>
+        <span class="eyebrow">Profil utilisateur</span>
+        <h1>Modifier mon compte</h1>
+    </div>
+</div>
+
+@if (TempData["SuccessMessage"] is string message)
+{
+    <div class="content-card success-banner">@message</div>
+}
+
+<div class="dashboard-grid secondary">
+    <section class="content-card form-card">
+        <div class="section-head">
+            <div>
+                <span class="eyebrow">Informations personnelles</span>
+                <h2>Profil</h2>
+            </div>
+        </div>
+
+        <form asp-action="Manage" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="FullName" class="form-control" placeholder="Nom complet" />
+                        <label asp-for="FullName"></label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="Email" class="form-control" placeholder="Email" />
+                        <label asp-for="Email"></label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="PhoneNumber" class="form-control" placeholder="Telephone" />
+                        <label asp-for="PhoneNumber"></label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="Matricule" class="form-control" placeholder="Matricule" />
+                        <label asp-for="Matricule"></label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <select asp-for="DepartmentId" asp-items="Model.Departments" class="form-select">
+                            <option value="">Aucun departement</option>
+                        </select>
+                        <label asp-for="DepartmentId">Departement</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="ProfilePhotoPath" class="form-control" placeholder="Chemin photo" />
+                        <label asp-for="ProfilePhotoPath">Photo de profil</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="ProfilePhotoFile" class="form-label">Upload photo de profil</label>
+                    <input asp-for="ProfilePhotoFile" class="form-control" type="file" accept="image/*" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-enit-primary mt-4">Enregistrer les modifications</button>
+        </form>
+    </section>
+
+    <section class="content-card form-card">
+        <div class="section-head">
+            <div>
+                <span class="eyebrow">Securite</span>
+                <h2>Changer le mot de passe</h2>
+            </div>
+        </div>
+
+        <form asp-action="ChangePassword" method="post">
+            @Html.AntiForgeryToken()
+            <div class="row g-3">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input asp-for="@passwordModel.CurrentPassword" name="CurrentPassword" class="form-control" placeholder="Mot de passe actuel" />
+                        <label>Mot de passe actuel</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="@passwordModel.NewPassword" name="NewPassword" class="form-control" placeholder="Nouveau mot de passe" />
+                        <label>Nouveau mot de passe</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="@passwordModel.ConfirmNewPassword" name="ConfirmNewPassword" class="form-control" placeholder="Confirmation" />
+                        <label>Confirmer le mot de passe</label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-enit-light mt-4">Mettre a jour le mot de passe</button>
+        </form>
+    </section>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

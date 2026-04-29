@@ -1,0 +1,138 @@
+@model ENIT.Web.ViewModels.Dashboard.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<section class="dashboard-stage">
+    <div class="dashboard-stage-main">
+        <section class="dashboard-stage-header content-card">
+            <div class="dashboard-hero-copy">
+                <span class="eyebrow">Session @Model.AcademicSession</span>
+                <h1>Bienvenue, @Model.UserName</h1>
+                <p class="dashboard-hero-text">
+                    @Model.RoleName
+                    @if (!string.IsNullOrWhiteSpace(Model.DepartmentName))
+                    {
+                        <span> - @Model.DepartmentName</span>
+                    }
+                </p>
+                @if (!string.IsNullOrWhiteSpace(Model.Matricule))
+                {
+                    <span class="dashboard-identity-pill">@Model.Matricule</span>
+                }
+            </div>
+
+            <div class="dashboard-tags">
+                <span class="badge-soft">Vie etudiante</span>
+                <span class="badge-soft">Calendrier ENIT</span>
+                <span class="badge-soft">Suivi academique</span>
+            </div>
+        </section>
+
+        <section class="stats-grid compact-stats">
+            @foreach (var stat in Model.Stats)
+            {
+                <article class="stat-card @stat.Accent">
+                    <div class="stat-icon"><i class="ti ti-@stat.Icon"></i></div>
+                    <div>
+                        <span>@stat.Label</span>
+                        <strong>@stat.Value</strong>
+                    </div>
+                </article>
+            }
+        </section>
+
+        <section class="content-card dashboard-block">
+            <div class="section-head">
+                <div>
+                    <span class="mini-label">Selection</span>
+                    <h2>Activites mises en avant</h2>
+                </div>
+                <a asp-controller="Activities" asp-action="Index" class="link-arrow">Voir tout</a>
+            </div>
+
+            <div class="feature-grid dashboard-feature-grid">
+                @foreach (var item in Model.FeaturedActivities)
+                {
+                    <a asp-controller="Activities" asp-action="Details" asp-route-id="@item.Id" class="feature-activity-card premium-card">
+                        <img src="@(string.IsNullOrWhiteSpace(item.CoverImagePath) ? "/images/activity-default.svg" : item.CoverImagePath)" alt="@item.Title" />
+                        <div>
+                            <div class="card-pill-row">
+                                <span class="badge-soft">@item.DepartmentName</span>
+                                <span class="status-badge">@item.Status</span>
+                            </div>
+                            <h3>@item.Title</h3>
+                            <p>@item.Type - @item.StartDate.ToString("dd MMM yyyy, HH:mm")</p>
+                        </div>
+                    </a>
+                }
+            </div>
+        </section>
+
+        <section class="content-card dashboard-block">
+            <div class="section-head">
+                <div>
+                    <span class="mini-label">Agenda</span>
+                    <h2>Prochaines activites</h2>
+                </div>
+                <a asp-controller="Calendar" asp-action="Index" class="link-arrow">Calendrier</a>
+            </div>
+
+            <div class="calendar-list">
+                @foreach (var evt in Model.UpcomingActivities.Take(4))
+                {
+                    <div class="calendar-item">
+                        <div class="calendar-date">
+                            <strong>@evt.StartDate.ToString("dd")</strong>
+                            <span>@evt.StartDate.ToString("MMM")</span>
+                        </div>
+                        <div>
+                            <h4>@evt.Title</h4>
+                            <p>@evt.DepartmentName - @evt.StartDate.ToString("dd/MM, HH:mm")</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </section>
+    </div>
+
+    <aside class="dashboard-stage-side">
+        <section class="content-card dashboard-side-card">
+            <div class="section-head">
+                <div>
+                    <span class="mini-label">Notifications</span>
+                    <h2>Flux recent</h2>
+                </div>
+            </div>
+            <div class="notification-list">
+                @foreach (var item in Model.Notifications)
+                {
+                    <div class="notification-item">
+                        <strong>@item.Title</strong>
+                        <p>@item.Message</p>
+                        <span>@item.Type - @item.SentAt.ToString("dd/MM HH:mm")</span>
+                    </div>
+                }
+            </div>
+        </section>
+
+        <section class="content-card dashboard-side-card">
+            <div class="section-head">
+                <div>
+                    <span class="mini-label">Institution</span>
+                    <h2>Departements</h2>
+                </div>
+            </div>
+            <div class="dept-mini-grid dashboard-dept-grid">
+                @foreach (var dept in Model.Departments.Take(6))
+                {
+                    <div class="dept-mini-card">
+                        <strong>@dept.Code</strong>
+                        <h4>@dept.Name</h4>
+                        <p>@dept.ActivityCount activites - @dept.UserCount utilisateurs</p>
+                    </div>
+                }
+            </div>
+        </section>
+    </aside>
+</section>

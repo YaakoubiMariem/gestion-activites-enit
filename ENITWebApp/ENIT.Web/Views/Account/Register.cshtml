@@ -1,0 +1,114 @@
+@model ENIT.Web.ViewModels.Account.RegisterViewModel
+@using Microsoft.AspNetCore.Mvc.Rendering
+@{
+    ViewData["Title"] = "Inscription";
+    var departments = ViewBag.Departments as IEnumerable<SelectListItem> ?? [];
+}
+
+<section class="auth-showcase">
+    <div class="auth-showcase-panel auth-showcase-form">
+        <div class="auth-showcase-top">
+            <a asp-controller="Home" asp-action="Index" class="auth-mini-brand">ENIT Activities Hub</a>
+            <a asp-action="Login" class="btn btn-auth-accent">Login</a>
+        </div>
+
+        <div class="auth-showcase-copy">
+            <h1>Sign up now</h1>
+            <p>Creez votre compte etudiant pour rejoindre les activites de l'ENIT, suivre votre agenda et participer a la vie du campus.</p>
+        </div>
+
+        <div class="auth-quick-access">
+            <button type="button" class="btn btn-auth-soft w-100">
+                <i class="ti ti-user-plus"></i>
+                <span>Create your ENIT account</span>
+            </button>
+            <div class="auth-divider"><span>student registration form</span></div>
+        </div>
+
+        <form method="post" class="auth-showcase-form-body">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label asp-for="FullName" class="form-label auth-label">Full name</label>
+                    <input asp-for="FullName" class="form-control auth-input" placeholder="Enter your full name" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Matricule" class="form-label auth-label">Matricule</label>
+                    <input asp-for="Matricule" class="form-control auth-input" placeholder="Student id" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Email" class="form-label auth-label">Email</label>
+                    <input asp-for="Email" class="form-control auth-input" placeholder="name@enit.tn" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="PhoneNumber" class="form-label auth-label">Phone</label>
+                    <input asp-for="PhoneNumber" class="form-control auth-input" placeholder="Phone number" />
+                </div>
+                <div class="col-12">
+                    <label asp-for="DepartmentId" class="form-label auth-label">Department</label>
+                    <select asp-for="DepartmentId" asp-items="departments" class="form-select auth-input">
+                        <option value="">Choose your department</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Password" class="form-label auth-label">Password</label>
+                    <input asp-for="Password" class="form-control auth-input" placeholder="Create a password" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="ConfirmPassword" class="form-label auth-label">Confirm password</label>
+                    <input asp-for="ConfirmPassword" class="form-control auth-input" placeholder="Confirm password" />
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-auth-primary w-100 mt-4">Create account</button>
+        </form>
+
+        <p class="auth-bottom-text">Already registered? <a asp-action="Login">Sign in</a></p>
+    </div>
+
+    <div class="auth-showcase-panel auth-showcase-visual">
+        <div class="auth-illustration auth-illustration-register">
+            <div class="auth-illustration-monitor">
+                <div class="monitor-topbar"></div>
+                <div class="monitor-screen">
+                    <div class="monitor-row">
+                        <span class="monitor-dot red"></span>
+                        <span class="monitor-dot blue"></span>
+                        <span class="monitor-line short"></span>
+                    </div>
+                    <div class="monitor-grid">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="floating-card one"></div>
+            <div class="floating-card two"></div>
+            <div class="floating-card three"></div>
+            <div class="idea-bulb">
+                <i class="ti ti-school"></i>
+            </div>
+            <div class="student-figure left"></div>
+            <div class="student-figure right"></div>
+        </div>
+
+        <div class="auth-visual-caption">
+            <img src="~/images/enit-logo.svg" alt="Logo ENIT" class="auth-side-logo" />
+            <div>
+                <span class="eyebrow">Student journey</span>
+                <h2>Une inscription simple pour rejoindre toute la vie universitaire</h2>
+                <p>Un seul compte pour vos activites, vos notifications, votre calendrier et vos interactions avec le departement.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,71 @@
+@{
+    ViewData["Title"] = "Calendrier";
+    var departments = ViewBag.Departments as IEnumerable<dynamic> ?? [];
+    int? selectedDepartment = ViewBag.DepartmentId as int?;
+}
+
+<section class="page-header">
+    <div>
+        <span class="eyebrow">Vue calendrier</span>
+        <h1>Calendrier interactif des activites</h1>
+    </div>
+    <div class="calendar-toolbar">
+        <form method="get" class="calendar-filter-form">
+            <select name="departmentId" class="form-select calendar-department-select" onchange="this.form.submit()">
+                <option value="">Tous les departements</option>
+                @foreach (var department in departments)
+                {
+                    if (selectedDepartment == (int)department.Id)
+                    {
+                        <option value="@department.Id" selected>@department.Label</option>
+                    }
+                    else
+                    {
+                        <option value="@department.Id">@department.Label</option>
+                    }
+                }
+            </select>
+        </form>
+    </div>
+</section>
+
+<section class="content-card calendar-page-card">
+    <div id="activityCalendar" data-calendar-endpoint="@Url.Action("Events", "Calendar", new { departmentId = selectedDepartment })"></div>
+</section>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const calendarElement = document.getElementById("activityCalendar");
+            if (!calendarElement || typeof FullCalendar === "undefined") return;
+
+            const calendar = new FullCalendar.Calendar(calendarElement, {
+                initialView: window.innerWidth < 768 ? "listWeek" : "dayGridMonth",
+                height: "auto",
+                firstDay: 1,
+                headerToolbar: {
+                    left: "prev,next today",
+                    center: "title",
+                    right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
+                },
+                locale: "fr",
+                navLinks: true,
+                editable: false,
+                dayMaxEvents: true,
+                eventTimeFormat: {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    meridiem: false
+                },
+                events: calendarElement.dataset.calendarEndpoint,
+                eventDidMount: function (info) {
+                    const extra = info.event.extendedProps;
+                    const tooltip = [extra.department, extra.type, extra.location].filter(Boolean).join(" | ");
+                    if (tooltip) info.el.title = tooltip;
+                }
+            });
+
+            calendar.render();
+        });
+    </script>
+}

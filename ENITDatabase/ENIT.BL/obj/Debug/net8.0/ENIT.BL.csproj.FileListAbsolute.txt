@@ -1,0 +1,11 @@
+F:\application_enit\ENITDatabase\ENIT.BL\bin\Debug\net8.0\ENIT.BL.deps.json
+F:\application_enit\ENITDatabase\ENIT.BL\bin\Debug\net8.0\ENIT.BL.dll
+F:\application_enit\ENITDatabase\ENIT.BL\bin\Debug\net8.0\ENIT.BL.pdb
+F:\application_enit\ENITDatabase\ENIT.BL\obj\Debug\net8.0\ENIT.BL.GeneratedMSBuildEditorConfig.editorconfig
+F:\application_enit\ENITDatabase\ENIT.BL\obj\Debug\net8.0\ENIT.BL.AssemblyInfoInputs.cache
+F:\application_enit\ENITDatabase\ENIT.BL\obj\Debug\net8.0\ENIT.BL.AssemblyInfo.cs
+F:\application_enit\ENITDatabase\ENIT.BL\obj\Debug\net8.0\ENIT.BL.csproj.CoreCompileInputs.cache
+F:\application_enit\ENITDatabase\ENIT.BL\obj\Debug\net8.0\ENIT.BL.dll
+F:\application_enit\ENITDatabase\ENIT.BL\obj\Debug\net8.0\refint\ENIT.BL.dll
+F:\application_enit\ENITDatabase\ENIT.BL\obj\Debug\net8.0\ENIT.BL.pdb
+F:\application_enit\ENITDatabase\ENIT.BL\obj\Debug\net8.0\ref\ENIT.BL.dll

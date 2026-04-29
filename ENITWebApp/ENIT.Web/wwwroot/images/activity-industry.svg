@@ -1,0 +1,16 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" rx="36" fill="url(#g2)"/>
+  <rect x="88" y="172" width="72" height="96" rx="14" fill="#D6F7EA"/>
+  <rect x="176" y="140" width="72" height="128" rx="14" fill="#B1E9CF"/>
+  <rect x="264" y="112" width="72" height="156" rx="14" fill="white"/>
+  <rect x="352" y="82" width="72" height="186" rx="14" fill="#EAF2FF"/>
+  <path d="M460 254L542 128" stroke="#FFF7D0" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="542" cy="128" r="22" fill="#F1B71C"/>
+  <text x="58" y="74" fill="white" font-size="36" font-family="Segoe UI, Arial">Lean Manufacturing</text>
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#20B486"/>
+      <stop offset="1" stop-color="#214A94"/>
+    </linearGradient>
+  </defs>
+</svg>

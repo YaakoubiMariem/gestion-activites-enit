@@ -1,0 +1,72 @@
+@{
+    ViewData["Title"] = "Accueil";
+    Layout = "_Layout";
+}
+
+<section class="home-refined-shell">
+    <div class="home-refined-hero content-card">
+        <div class="home-refined-copy">
+            <span class="eyebrow">Plateforme officielle ENIT</span>
+            <h1>Decouvrez les activites departementales dans un espace plus clair.</h1>
+            <p>
+                ENIT Activities Hub centralise les evenements, les inscriptions et le calendrier
+                dans une interface institutionnelle plus sobre, plus lisible et plus moderne.
+            </p>
+
+            <div class="home-refined-actions">
+                <a asp-controller="Activities" asp-action="Index" class="btn btn-enit-primary">Explorer les activites</a>
+                <a asp-controller="Calendar" asp-action="Index" class="btn btn-enit-light">Ouvrir le calendrier</a>
+            </div>
+        </div>
+
+        <div class="home-refined-panel">
+            <div class="home-refined-brand">
+                <img src="~/images/enit-logo.svg" alt="Logo ENIT" class="home-refined-logo" />
+                <div>
+                    <strong>ENIT Activities Hub</strong>
+                    <span>Ecole Nationale d'Ingenieurs de Tunis</span>
+                </div>
+            </div>
+
+            <div class="home-refined-metrics">
+                <article>
+                    <strong>08</strong>
+                    <span>Departements</span>
+                </article>
+                <article>
+                    <strong>24</strong>
+                    <span>Activites a venir</span>
+                </article>
+                <article>
+                    <strong>1200+</strong>
+                    <span>Participations</span>
+                </article>
+            </div>
+
+            <div class="home-refined-note">
+                <span class="mini-label">Vie universitaire</span>
+                <p>Suivez les activites, les inscriptions et les temps forts de chaque departement dans une experience plus simple.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="home-refined-grid">
+        <article class="content-card home-refined-card">
+            <span class="mini-label">Etudiants</span>
+            <h2>Un acces rapide aux activites et a vos inscriptions</h2>
+            <p>Consultez les evenements a venir, gerez vos participations et reperez les initiatives de votre departement.</p>
+        </article>
+
+        <article class="content-card home-refined-card">
+            <span class="mini-label">Departements</span>
+            <h2>Une gestion plus propre et plus presentable</h2>
+            <p>Publiez les activites, organisez les participants et suivez la dynamique de votre unite academique.</p>
+        </article>
+
+        <article class="content-card home-refined-card">
+            <span class="mini-label">Calendrier</span>
+            <h2>Une vue claire sur toute la saison universitaire</h2>
+            <p>Retrouvez les dates importantes, les rencontres et les evenements a travers une navigation plus fluide.</p>
+        </article>
+    </div>
+</section>

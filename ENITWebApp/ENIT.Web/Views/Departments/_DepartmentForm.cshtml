@@ -1,0 +1,41 @@
+@model ENIT.Web.ViewModels.Departments.DepartmentFormViewModel
+
+<form method="post" class="content-card form-card" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <input asp-for="Id" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+    <div class="row g-3">
+        <div class="col-md-8">
+            <div class="form-floating">
+                <input asp-for="Name" class="form-control" placeholder="Nom" />
+                <label asp-for="Name"></label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-floating">
+                <input asp-for="Code" class="form-control" placeholder="Code" />
+                <label asp-for="Code"></label>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-floating">
+                <textarea asp-for="Description" class="form-control" placeholder="Description" style="height: 160px"></textarea>
+                <label asp-for="Description"></label>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-floating">
+                <input asp-for="LogoPath" class="form-control" placeholder="Logo" />
+                <label asp-for="LogoPath">Chemin logo</label>
+            </div>
+        </div>
+        <div class="col-12">
+            <label asp-for="LogoFile" class="form-label">Upload logo du departement</label>
+            <input asp-for="LogoFile" class="form-control" type="file" accept="image/*" />
+        </div>
+    </div>
+    <div class="mt-4 d-flex gap-2">
+        <button type="submit" class="btn btn-enit-primary">Enregistrer</button>
+        <a asp-action="Index" class="btn btn-enit-light">Annuler</a>
+    </div>
+</form>

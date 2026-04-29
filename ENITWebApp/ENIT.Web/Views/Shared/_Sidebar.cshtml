@@ -1,0 +1,55 @@
+@using ENIT.BL.Entities
+@using ENIT.Web.Infrastructure
+@model (ApplicationUser? User, string? RoleName)
+
+<div class="sidebar-shell">
+    <a asp-controller="Home" asp-action="Index" class="brand">
+        <span class="brand-mark">
+            <img src="~/images/enit-logo.svg" alt="Logo ENIT" class="brand-logo" />
+        </span>
+        <span class="brand-copy">
+            <strong>ENIT Activities Hub</strong>
+            <span>Plateforme officielle</span>
+        </span>
+    </a>
+
+    <section class="profile-panel">
+        <img src="@(Model.User?.ProfilePhotoPath ?? "/images/avatar-default.svg")" alt="Profil" class="profile-avatar" />
+        <div class="profile-copy">
+            <h6>@(Model.User?.FullName ?? "Utilisateur")</h6>
+            <span>@Model.RoleName</span>
+            <small>@(Model.User?.Matricule ?? "Compte ENIT")</small>
+        </div>
+    </section>
+
+    <nav class="menu-block">
+        <span class="menu-title">Navigation</span>
+        <a asp-controller="Dashboard" asp-action="Index" class="nav-link-side"><i class="ti ti-layout-dashboard"></i><span>Dashboard</span></a>
+        <a asp-controller="Activities" asp-action="Index" class="nav-link-side"><i class="ti ti-calendar-event"></i><span>Activites</span></a>
+        <a asp-controller="Calendar" asp-action="Index" class="nav-link-side"><i class="ti ti-calendar-stats"></i><span>Calendrier</span></a>
+        <a asp-controller="Participations" asp-action="MyRegistrations" class="nav-link-side"><i class="ti ti-user-check"></i><span>Mes inscriptions</span></a>
+        <a asp-controller="Account" asp-action="Manage" class="nav-link-side"><i class="ti ti-user-cog"></i><span>Mon compte</span></a>
+        <a asp-controller="Departments" asp-action="Index" class="nav-link-side"><i class="ti ti-building-community"></i><span>Departements</span></a>
+        @if (Context.User.IsInRole(RoleNames.DepartmentAdmin) || Context.User.IsInRole(RoleNames.SuperAdmin))
+        {
+            <a asp-controller="Activities" asp-action="Create" class="nav-link-side"><i class="ti ti-circle-plus"></i><span>Nouvelle activite</span></a>
+        }
+        @if (Context.User.IsInRole(RoleNames.SuperAdmin))
+        {
+            <a asp-controller="Departments" asp-action="Create" class="nav-link-side"><i class="ti ti-settings"></i><span>Administration</span></a>
+        }
+    </nav>
+
+    <div class="sidebar-cta">
+        <p>Session academique</p>
+        <strong>@($"{DateTime.Today.Year}-{DateTime.Today.Year + 1}")</strong>
+        <span>Une experience institutionnelle plus claire pour toutes les activites de l'ENIT.</span>
+    </div>
+
+    <form asp-controller="Account" asp-action="Logout" method="post" class="mt-auto">
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn sidebar-logout-btn w-100">
+            <i class="ti ti-logout"></i> Deconnexion
+        </button>
+    </form>
+</div>

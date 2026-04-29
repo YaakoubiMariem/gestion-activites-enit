@@ -1,0 +1,39 @@
+@model IEnumerable<ENIT.Web.ViewModels.Participations.MyRegistrationItemViewModel>
+@{
+    ViewData["Title"] = "Mes inscriptions";
+}
+
+<div class="page-header">
+    <div>
+        <span class="eyebrow">Parcours étudiant</span>
+        <h1>Mes inscriptions</h1>
+    </div>
+</div>
+
+<section class="content-card">
+    <div class="table-responsive">
+        <table class="table table-modern">
+            <thead>
+                <tr>
+                    <th>Activité</th>
+                    <th>Département</th>
+                    <th>Date activité</th>
+                    <th>Inscription</th>
+                    <th>Statut</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><a asp-controller="Activities" asp-action="Details" asp-route-id="@item.ActivityId">@item.ActivityTitle</a></td>
+                    <td>@item.Department</td>
+                    <td>@item.StartDate.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@item.RegistrationDate.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@item.Status</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</section>

@@ -1,0 +1,70 @@
+@using ENIT.BL.Entities
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    var currentUser = SignInManager.IsSignedIn(User) ? await UserManager.GetUserAsync(User) : null;
+    var roles = currentUser is not null ? await UserManager.GetRolesAsync(currentUser) : Array.Empty<string>();
+    var roleName = roles.FirstOrDefault();
+    var pageTitle = ViewData["Title"]?.ToString() ?? "ENIT Activities Hub";
+}
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@pageTitle - ENIT Activities Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@3.31.0/tabler-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ENIT.Web.styles.css" asp-append-version="true" />
+</head>
+<body class="app-body @(SignInManager.IsSignedIn(User) ? "is-auth" : "is-guest")">
+    <div class="app-shell">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <aside class="sidebar d-none d-xl-flex">
+                <partial name="_Sidebar" model="(currentUser, roleName)" />
+            </aside>
+
+            <div class="offcanvas offcanvas-start mobile-sidebar" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+                <div class="offcanvas-header">
+                    <h5 id="mobileSidebarLabel" class="mb-0">ENIT Activities Hub</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fermer"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <partial name="_Sidebar" model="(currentUser, roleName)" />
+                </div>
+            </div>
+        }
+
+        <div class="app-main">
+            <partial name="_Topbar" model="(currentUser, roleName, pageTitle)" />
+
+            <main class="page-content">
+                @RenderBody()
+            </main>
+
+            <footer class="app-footer">
+                <div>
+                    <strong>ENIT Activities Hub</strong>
+                    <span>Plateforme institutionnelle des activites departementales de l'ENIT</span>
+                </div>
+                <div class="footer-meta">
+                    <span>Ecole Nationale d'Ingenieurs de Tunis</span>
+                    <span>@DateTime.Now.Year</span>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

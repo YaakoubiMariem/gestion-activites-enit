@@ -1,0 +1,17 @@
+F:\application_enit\ENITDatabase\ENIT.DAL\obj\Debug\net8.0\ENIT.DAL.csproj.AssemblyReference.cache
+F:\application_enit\ENITDatabase\ENIT.DAL\obj\Debug\net8.0\ENIT.DAL.GeneratedMSBuildEditorConfig.editorconfig
+F:\application_enit\ENITDatabase\ENIT.DAL\obj\Debug\net8.0\ENIT.DAL.AssemblyInfoInputs.cache
+F:\application_enit\ENITDatabase\ENIT.DAL\obj\Debug\net8.0\ENIT.DAL.AssemblyInfo.cs
+F:\application_enit\ENITDatabase\ENIT.DAL\obj\Debug\net8.0\ENIT.DAL.csproj.CoreCompileInputs.cache
+F:\application_enit\ENITDatabase\ENIT.DAL\bin\Debug\net8.0\ENIT.DAL.deps.json
+F:\application_enit\ENITDatabase\ENIT.DAL\bin\Debug\net8.0\ENIT.DAL.runtimeconfig.json
+F:\application_enit\ENITDatabase\ENIT.DAL\bin\Debug\net8.0\ENIT.DAL.dll
+F:\application_enit\ENITDatabase\ENIT.DAL\bin\Debug\net8.0\ENIT.DAL.pdb
+F:\application_enit\ENITDatabase\ENIT.DAL\bin\Debug\net8.0\ENIT.BL.dll
+F:\application_enit\ENITDatabase\ENIT.DAL\bin\Debug\net8.0\ENIT.BL.pdb
+F:\application_enit\ENITDatabase\ENIT.DAL\obj\Debug\net8.0\ENIT.DAL.csproj.Up2Date
+F:\application_enit\ENITDatabase\ENIT.DAL\obj\Debug\net8.0\ENIT.DAL.dll
+F:\application_enit\ENITDatabase\ENIT.DAL\obj\Debug\net8.0\refint\ENIT.DAL.dll
+F:\application_enit\ENITDatabase\ENIT.DAL\obj\Debug\net8.0\ENIT.DAL.pdb
+F:\application_enit\ENITDatabase\ENIT.DAL\obj\Debug\net8.0\ENIT.DAL.genruntimeconfig.cache
+F:\application_enit\ENITDatabase\ENIT.DAL\obj\Debug\net8.0\ref\ENIT.DAL.dll
